@@ -10,6 +10,7 @@ const DB = path.join(__dirname, "data", "db.json");
 
 app.use(express.json({ limit: "1mb" }));
 app.use(express.static(path.join(__dirname, "public")));
+app.get("/google29075a6a868aa851.html", (req, res) => res.sendFile(path.join(__dirname, "public", "google29075a6a868aa851.html")));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 const uploadDir = path.join(__dirname, "uploads");
