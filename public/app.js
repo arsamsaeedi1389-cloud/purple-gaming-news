@@ -76,3 +76,23 @@ async function loadUsers(){
 }
 async function changeRole(id,role){try{await api("/api/users/"+id+"/role",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({role})});loadUsers()}catch(e){alert(e.message)}}
 updateAccount();loadArticles();
+
+const logoutBtn = document.getElementById("logoutBtn");
+
+function updateLogoutButton() {
+  if (!logoutBtn) return;
+  if (session) {
+    logoutBtn.classList.remove("hidden");
+  } else {
+    logoutBtn.classList.add("hidden");
+  }
+}
+
+logoutBtn?.addEventListener("click", () => {
+  session = null;
+  localStorage.removeItem("session");
+  updateLogoutButton();
+  location.reload();
+});
+
+updateLogoutButton();
