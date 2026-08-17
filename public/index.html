@@ -55,7 +55,8 @@
       <select name="category">
         <option>گیم</option><option>تکنولوژی</option><option>هوش مصنوعی</option><option>اخبار</option>
       </select>
-      <input name="image" placeholder="لینک تصویر (اختیاری)">
+      <label class="file-label">تصویر خبر<input id="imageFile" type="file" accept="image/jpeg,image/png,image/webp,image/gif"></label>
+      <input name="image" id="imageUrl" placeholder="لینک تصویر (اختیاری)" readonly>
       <textarea name="content" placeholder="متن خبر" required></textarea>
       <button class="primary">انتشار خبر</button>
     </form>

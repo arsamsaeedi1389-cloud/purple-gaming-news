@@ -14,3 +14,4 @@ form{display:grid;gap:11px}input,textarea,select{background:#0a0810;color:#fff;b
 .user-row{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #2b1d3b;padding:12px 0}.user-row button{background:#302047;color:#fff;border:0;border-radius:7px;padding:7px 10px}
 footer{text-align:center;padding:40px;color:#777;border-top:1px solid #21172f;margin-top:60px}
 @media(max-width:850px){header{flex-wrap:wrap}.logo{width:100%;text-align:center}nav{order:3;width:100%}.actions{margin:auto}.hero{min-height:330px;padding:50px 7%}.hero h1{font-size:42px}.section-head{align-items:stretch;flex-direction:column}}
+.file-label{display:grid;gap:7px;color:#bbb;font-size:13px}.file-label input{padding:8px;background:#0a0810;color:#fff;border:1px solid #35214b;border-radius:9px}

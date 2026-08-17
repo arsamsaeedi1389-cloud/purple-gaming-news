@@ -48,9 +48,25 @@ async function openAdminOrLogout(){
  if(session.role!=="admin"){if(confirm("از حساب خارج شوی؟")){session=null;localStorage.removeItem("session");updateAccount()}return}
  $("#adminPanel").classList.remove("hidden");loadUsers();
 }
+$("#imageFile").onchange=async ()=>{
+ const file=$("#imageFile").files[0];
+ if(!file){$("#imageUrl").value="";return}
+ if(file.size>5*1024*1024){alert("حجم تصویر باید حداکثر ۵ مگابایت باشد");$("#imageFile").value="";return}
+ const fd=new FormData(); fd.append("image",file);
+ try{
+  const data=await api("/api/upload",{method:"POST",body:fd});
+  $("#imageUrl").value=data.url;
+ }catch(e){alert(e.message);$("#imageFile").value="";}
+};
+
 $("#articleForm").onsubmit=async e=>{
- e.preventDefault();const f=new FormData(e.target);const body=Object.fromEntries(f.entries());
- try{await api("/api/articles",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});e.target.reset();loadArticles();alert("خبر منتشر شد")}catch(e){alert(e.message)}
+ e.preventDefault();
+ const f=new FormData(e.target);
+ const body={title:f.get("title"),summary:f.get("summary"),category:f.get("category"),content:f.get("content"),image:f.get("image")};
+ try{
+  await api("/api/articles",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
+  e.target.reset();$("#imageUrl").value="";loadArticles();alert("خبر منتشر شد");
+ }catch(e){alert(e.message)}
 };
 async function loadUsers(){
  try{

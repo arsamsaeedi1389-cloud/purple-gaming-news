@@ -2,6 +2,7 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
+const multer = require("multer");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -9,6 +10,25 @@ const DB = path.join(__dirname, "data", "db.json");
 
 app.use(express.json({ limit: "1mb" }));
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+const uploadDir = path.join(__dirname, "uploads");
+if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, uploadDir),
+  filename: (req, file, cb) => {
+    const ext = path.extname(file.originalname).toLowerCase();
+    cb(null, `${Date.now()}-${crypto.randomBytes(5).toString("hex")}${ext}`);
+  }
+});
+const upload = multer({
+  storage,
+  limits: { fileSize: 5 * 1024 * 1024 },
+  fileFilter: (req, file, cb) => {
+    const allowed = ["image/jpeg", "image/png", "image/webp", "image/gif"];
+    cb(null, allowed.includes(file.mimetype));
+  }
+});
 
 function readDB() {
   return JSON.parse(fs.readFileSync(DB, "utf8"));
@@ -90,6 +110,11 @@ app.post("/api/login", (req, res) => {
 
 app.get("/api/me", auth, (req, res) => {
   res.json({ username: req.user.username, role: req.user.role });
+});
+
+app.post("/api/upload", auth, adminOnly, upload.single("image"), (req, res) => {
+  if (!req.file) return res.status(400).json({ error: "فایل تصویر معتبر نیست یا انتخاب نشده است" });
+  res.json({ url: `/uploads/${req.file.filename}` });
 });
 
 app.post("/api/articles", auth, adminOnly, (req, res) => {
