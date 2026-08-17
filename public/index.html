@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Purple Gaming News</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header>
+  <div class="logo">PURPLE<span>NEWS</span></div>
+  <nav>
+    <button data-cat="همه">خانه</button>
+    <button data-cat="گیم">🎮 گیم</button>
+    <button data-cat="تکنولوژی">💻 تکنولوژی</button>
+    <button data-cat="هوش مصنوعی">🤖 هوش مصنوعی</button>
+    <button data-cat="اخبار">📰 اخبار</button>
+  </nav>
+  <div class="actions">
+    <a class="support" href="https://reymit.ir/thelastofarsamarsamgameng98" target="_blank">❤️ حمایت از ما</a>
+    <button id="accountBtn">ورود / ثبت‌نام</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div>
+    <p class="tag">NEXT LEVEL NEWS</p>
+    <h1>دنیای گیم و تکنولوژی<br><span>در یک قاب</span></h1>
+    <p>اخبار گیم، تکنولوژی و هوش مصنوعی را سریع و ساده دنبال کن.</p>
+  </div>
+</section>
+
+<main>
+  <div class="section-head">
+    <h2 id="sectionTitle">آخرین اخبار</h2>
+    <input id="search" placeholder="جستجوی خبر...">
+  </div>
+  <section id="articles" class="grid"></section>
+</main>
+
+<div id="modal" class="modal hidden">
+  <div class="modal-box">
+    <button class="close">×</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<div id="adminPanel" class="modal hidden">
+  <div class="modal-box wide">
+    <button class="close">×</button>
+    <h2>پنل مدیریت 👑</h2>
+    <form id="articleForm">
+      <input name="title" placeholder="عنوان خبر" required>
+      <input name="summary" placeholder="خلاصه خبر">
+      <select name="category">
+        <option>گیم</option><option>تکنولوژی</option><option>هوش مصنوعی</option><option>اخبار</option>
+      </select>
+      <input name="image" placeholder="لینک تصویر (اختیاری)">
+      <textarea name="content" placeholder="متن خبر" required></textarea>
+      <button class="primary">انتشار خبر</button>
+    </form>
+    <hr>
+    <h3>مدیریت کاربران</h3>
+    <div id="users"></div>
+  </div>
+</div>
+
+<div id="authModal" class="modal hidden">
+  <div class="modal-box">
+    <button class="close">×</button>
+    <div class="tabs"><button id="loginTab">ورود</button><button id="registerTab">ثبت‌نام</button></div>
+    <form id="authForm">
+      <input id="username" placeholder="نام کاربری" required>
+      <input id="password" type="password" placeholder="رمز عبور" required>
+      <button class="primary">ورود</button>
+    </form>
+    <p id="authMsg"></p>
+  </div>
+</div>
+
+<footer>© 2026 Purple News — ساخته شده برای دوستداران گیم و فناوری</footer>
+<script src="/app.js"></script>
+</body>
+</html>
